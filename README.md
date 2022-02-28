@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("PORN X HUB", "DarkTheme")
+local Window = Library.CreateLib("PORN X HUB", "BloodTheme")
 local Tab = Window:NewTab("Main")
 local Section = Tab:NewSection("Autofram")
 Section:NewButton("Autofram", "Autofram PORN X HUB", function()
@@ -16,7 +16,7 @@ _G.FastAttack = true
  
 function checklevel()
     local Level = game:GetService("Players").LocalPlayer.Data.Level.Value
-    if Level == 1 or Level <= 15 then
+    if Level == 1 or Level <= 10 then
         MON = "Bandit [Lv. 5]"
         QUESTTITLE = "Bandit"
         QUESTPOS = CFrame.new(1060.0158691406, 16.424287796021, 1547.9769287109)
@@ -314,15 +314,15 @@ Section:NewToggle("Autofram3", "Clicl to Autofram3", function(state)
      
     function checklevel()
         local Level = game:GetService("Players").LocalPlayer.Data.Level.Value
-        if Level == 1 or Level <= 9 then
+        if Level == 15 or Level <= 35 then
             MON = "Gorilla [Lv. 20]"
-            QUESTTITLE = "Bandit"
-            QUESTPOS = CFrame.new(1060.0158691406, 16.424287796021, 1547.9769287109)
-            MONPOS = CFrame.new(1148.8698730469, 16.432844161987, 1630.5396728516)
+            QUESTTITLE = "Gorilla"
+            QUESTPOS = CFrame.new(-1599.4398193359375, 36.85213851928711, 153.53672790527344)
+            MONPOS = CFrame.new(-1218.9427490234375, 6.220604419708252, -461.67633056640625)
             QUESTNAME = "JungleQuest"
             QUESTNUMBER = 2
-            SPAWNPOINT = "Default"
-            SPAWNPOINTPOS = CFrame.new(973.96197509766, 16.273551940918, 1413.2775878906)
+            SPAWNPOINT = "Jungle"
+            SPAWNPOINTPOS = CFrame.new(-1336.28955078125, 11.852882385253906, 496.2724609375)
         end
     end
     Method = CFrame.new(0,25,0)
