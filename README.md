@@ -2,7 +2,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 local Window = Library.CreateLib("PORN X HUB", "BloodTheme")
 local Tab = Window:NewTab("Main")
 local Section = Tab:NewSection("Autofram")
-Section:NewToggle("Autofram", "ToggleInfo", function(state)
+Section:NewToggle("Autofram", "Click For AutoframLevel(1-10)", function(state)
     _G.AutoFarm_Level = state
     _G.FastAttack = true
      
@@ -151,7 +151,7 @@ end)
 
 
 -----AutoFram2-------
-Section:NewToggle("Autofram(2)", "Click For Autofram2...", function(state)
+Section:NewToggle("Autofram(2)", "Click For Autofram2(10-15)", function(state)
     _G.AutoFarm_Level = state
     _G.FastAttack = true
      
@@ -301,7 +301,7 @@ end)
 
 
 ------Autofram3------
-Section:NewToggle("Autofram(3)", "Click For Autofram3", function(state)
+Section:NewToggle("Autofram(3)", "Click For Autofram3(15-30)", function(state)
     _G.AutoFarm_Level = state
     _G.FastAttack = true
      
@@ -448,7 +448,7 @@ Section:NewToggle("Autofram(3)", "Click For Autofram3", function(state)
 end)
 
 ------Autofram4-------
-Section:NewToggle("Autofram(4)", "Click For Autofram4", function(state)
+Section:NewToggle("Autofram(4)", "Click For Autofram4(30-45)", function(state)
     _G.AutoFarm_Level = state
     _G.FastAttack = true
      
