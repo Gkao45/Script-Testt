@@ -462,15 +462,15 @@ Section:NewToggle("Autofram(4)", "Click For Autofram4", function(state)
      
     function checklevel()
         local Level = game:GetService("Players").LocalPlayer.Data.Level.Value
-        if Level == 25 or Level <= 40 then
+        if Level == 30 or Level <= 45 then
             MON = "Pirate [Lv. 35]"
             QUESTTITLE = "Pirate"
-            QUESTPOS = CFrame.new(-1140.4827880859375, 4.752061367034912, 3829.623291015625)
-            MONPOS = CFrame.new(-1198.0413818359375, 4.752061367034912, 3914.32177734375)
+            QUESTPOS = CFrame.new(-1140.4400634765625, 5.15206241607666, 3830.413330078125)
+            MONPOS = CFrame.new(-1216.5858154296875, 4.752061367034912, 3920.011474609375)
             QUESTNAME = "BuggyQuest1"
             QUESTNUMBER = 1
             SPAWNPOINT = "Pirate"
-            SPAWNPOINTPOS = CFrame.new(-1188.3966064453125, 4.751573085784912, 3815.531494140625)
+            SPAWNPOINTPOS = CFrame.new(-1188.1103515625, 4.751567840576172, 3815.979248046875)
         end
     end
     Method = CFrame.new(0,19,0)
@@ -595,7 +595,153 @@ Section:NewToggle("Autofram(4)", "Click For Autofram4", function(state)
 end)
 
 
-
+--------Autofram(5)---------
+Section:NewToggle("Autofram(5)", "Click For Autofram(5)", function(state)
+        _G.AutoFarm_Level = state
+        _G.FastAttack = true
+         
+         
+         
+         
+         
+         
+         
+         
+         
+        function checklevel()
+            local Level = game:GetService("Players").LocalPlayer.Data.Level.Value
+            if Level == 15 or Level <= 35 then
+                MON = "Gorilla [Lv. 20]"
+                QUESTTITLE = "Gorilla"
+                QUESTPOS = CFrame.new(-1599.4398193359375, 36.85213851928711, 153.53672790527344)
+                MONPOS = CFrame.new(-1218.9427490234375, 6.220604419708252, -461.67633056640625)
+                QUESTNAME = "JungleQuest"
+                QUESTNUMBER = 2
+                SPAWNPOINT = "Jungle"
+                SPAWNPOINTPOS = CFrame.new(-1336.28955078125, 11.852882385253906, 496.2724609375)
+            end
+        end
+        Method = CFrame.new(0,19,0)
+         
+        spawn(function()
+           while wait(3) do
+               if Methodnow == 1 then
+                Methodnow = 2
+                Method = CFrame.new(0,19,0)
+                else
+                Methodnow = 1
+                Method = CFrame.new(0,0,19)
+               end
+            end
+        end)
+         
+        spawn(function()
+           while wait() do
+               if _G.WARP then
+                   game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                else
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                end
+            end
+        end)
+         
+        spawn(function()
+            game:GetService("RunService").Heartbeat:Connect(function()
+                if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") and _G.AutoFarm_Level then
+                    setfflag("HumanoidParallelRemoveNoPhysics", "False")
+                    setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+                    game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+                end
+            end)
+        end)
+         
+         
+        spawn(function()
+            while wait() do
+                if _G.AutoFarm_Level then
+                    pcall(function()
+                        checklevel()
+            
+                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,QUESTTITLE) then
+                            local args = {
+                                [1] = "AbandonQuest"
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        end
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                            
+                            if game:GetService("Players").LocalPlayer.Data.SpawnPoint.Value == SPAWNPOINT then
+                                local args = {
+                                    [1] = "SetTeam",
+                                    [2] = "Pirates"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                wait(0.5)
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = QUESTPOS
+                                wait(0.8)
+                                    local args = {
+                                        [1] = "StartQuest",
+                                        [2] = QUESTNAME,
+                                        [3] = QUESTNUMBER
+                                    }
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                wait(0.8)
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MONPOS
+                            else
+                                _G.WARP = true
+                                repeat 
+                                    wait()
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = SPAWNPOINTPOS
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                                until game:GetService("Players").LocalPlayer.Data.SpawnPoint.Value == SPAWNPOINT or _G.AutoFarm_Level == false
+                                _G.WARP = false
+                            end
+                        end
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            for i2,v2 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == MON and v2.Name == MON then
+                                    v2.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                                    v2.HumanoidRootPart.CanCollide = false
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * Method
+                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                end
+                            end
+                        end
+                    end)
+                end
+            end
+        end)
+         
+         
+         
+        spawn(function()
+           game:GetService("RunService").RenderStepped:Connect(function()
+            pcall(function()
+                if _G.FastAttack and _G.AutoFarm_Level then
+                    local Combat = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+                    local Cemara = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework.CameraShaker)
+                    Cemara.CameraShakeInstance.CameraShakeState = {FadingIn = 3, FadingOut = 2, Sustained = 0, Inactive = 1}
+                    Combat.activeController.timeToNextAttack = 0
+                    Combat.activeController.hitboxMagnitude = 120
+                    Combat.activeController.increment = 3
+                end
+            end)
+        end) 
+        end)
+         
+         
+        spawn(function()
+           game:GetService("RunService").RenderStepped:Connect(function()
+            pcall(function()
+                if _G.AutoFarm_Level then
+                    game:GetService'VirtualUser':CaptureController()
+                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                end
+            end)
+        end) 
+        end)
+    end)
+ 
 --------Teleport----------
 local Tab = Window:NewTab("Teleport")
 local Teleport = Tab:NewSection("Teleport")
